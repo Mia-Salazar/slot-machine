@@ -17,6 +17,17 @@
             <h2 class="subtitle">María Salazar García-Rosales</h2>
         </header>
         <main>
+            <section class="coins-container">
+                <h3 class="coins-title">Introduce monedas:</h3>
+                <form class="form" action="example" method="POST" id="form">
+                    <label for="coins">Introduce monedas</label>
+                    <input type="number" name="coins" id="coins" placeholder="Introduce monedas" min="1">
+                    <button type="submit" id="coins-button">Introducir</button>
+                </form>
+                <p>El número de monedas actual es:</p>
+                <p class="number-coins" id="number-coins">0</p>
+                <button type="button" id="leave">Salir</button>
+            </section>
 
         </main>
         <script type="text/javascript" src="interaction.js"></script>
