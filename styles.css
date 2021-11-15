@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    width: 100%;
+    padding: 18px;
+    background-color: #105652;
+    color: white;
+}
+
+.header .title {
+    margin: 0;
+    font-size: 32px;
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+
+.header .subtitle {
+    margin-top: 0;
+    font-size: 16px;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+}
