@@ -2,6 +2,7 @@
 const coins = document.getElementById("coins");
 const coinsLabel = document.getElementById("number-coins");
 const coinsButton = document.getElementById("coins-button");
+const handleImage = document.getElementById("handle");
 let coinsWained = 0;
 
 //Coins management
@@ -14,6 +15,7 @@ function processForm(event) {
         coins.disabled = true;
         coinsButton.disabled = true;
         coinsLabel.innerHTML = coins.value;
+        coins.value = 0;
     }
 }
 
@@ -25,3 +27,30 @@ function quit() {
     coins.disabled = false;
     coinsButton.disabled = false;
 }
+
+
+//Slot management
+handleImage.addEventListener("mousedown", clickHandle, false);
+handleImage.addEventListener("click", finishClickHandle, false);
+
+function roll() {
+    coinsLabel.innerHTML = coinsLabel.innerHTML - 1;
+}
+
+function insertCoin() {
+    window.alert("Por favor, introduce monedas.");
+}
+
+function clickHandle() {
+    if (coinsLabel.innerHTML > 0) {
+        handleImage.src = "img/palancaDOWN.png";
+        roll();
+    } else {
+        insertCoin();
+    }
+}
+
+function finishClickHandle() {
+    handleImage.src = "img/palancaUP.png";
+}
+
