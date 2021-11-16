@@ -12,7 +12,7 @@ body {
 .header {
     width: 100%;
     padding: 18px;
-    background-color: #105652;
+    background-color: #0F838C;
     color: white;
 }
 
@@ -85,6 +85,10 @@ body {
 
 .handle-container {
     margin: 0;
+}
+
+.handle-container:hover {
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
