@@ -1,8 +1,11 @@
 //Variable declaration
+var listaImagenes = ["aubergine", "banana", "carrots", "cherries", "dollar", "lemon", "orange", "peach", "potato", "tomato"];
 const coins = document.getElementById("coins");
 const coinsLabel = document.getElementById("number-coins");
 const coinsButton = document.getElementById("coins-button");
 const handleImage = document.getElementById("handle");
+const imagesContainer = document.getElementById("figures-container");
+const imagesArray = imagesContainer.getElementsByTagName("img");
 let coinsWained = 0;
 
 //Coins management
@@ -27,15 +30,63 @@ function quit() {
     coins.disabled = false;
     coinsButton.disabled = false;
 }
+//Roll
+function randomNumber() {
+    return Math.round(Math.random()*9);
+}
 
+function calculateDollar(number) {
+    const dollarValue = [1, 4, 10];
+    coinsWained = coinsWained + dollarValue[number];
+}
+
+function calculateFruitAndVegetable(number, array) {
+    let numberToAdd = 0;
+    if (array[0] === array[1] && array[1] === array[2]) {
+        numberToAdd = 5;
+    } else {
+        if (array[0] === array[1] && array[0] !== "dollar") {
+            numberToAdd = 2;
+        }
+        if (array[1] === array[2] && array[1] !== "dollar") {
+            numberToAdd = 2;
+        }
+
+        if (array[0] === array[2] && array[2] !== "dollar") {
+            numberToAdd = 2;
+        }
+    }
+    if (numberToAdd === 2 && number === 1) {
+        numberToAdd = 3;
+    }
+    coinsWained = coinsWained + numberToAdd;
+}
+
+function changeImages() {
+    let imgArray = [];
+    for (let i = 0; i < 3; i++) {
+        const number = randomNumber();
+        imagesArray[i].src = `img/${listaImagenes[number]}.png`;
+        imgArray.push(listaImagenes[number]);
+    }
+    return imgArray;
+}
+
+function roll() {
+    coinsLabel.innerHTML = coinsLabel.innerHTML - 1;
+    const imgArray = changeImages();
+    const dollarsQuantity = imgArray.filter(figure => figure === "dollar");
+    if (dollarsQuantity.length > 0) {
+        calculateDollar(dollarsQuantity.length - 1);
+    }
+    if (dollarsQuantity.length < 3) {
+        calculateFruitAndVegetable(dollarsQuantity.length, imgArray);
+    }
+}
 
 //Slot management
 handleImage.addEventListener("mousedown", clickHandle, false);
 handleImage.addEventListener("click", finishClickHandle, false);
-
-function roll() {
-    coinsLabel.innerHTML = coinsLabel.innerHTML - 1;
-}
 
 function insertCoin() {
     window.alert("Por favor, introduce monedas.");
@@ -53,4 +104,5 @@ function clickHandle() {
 function finishClickHandle() {
     handleImage.src = "img/palancaUP.png";
 }
+
 
