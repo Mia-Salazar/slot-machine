@@ -79,6 +79,9 @@ function calculateFruitAndVegetable(number, array) {
             feedbackText = "¡Dos IGUALES y una MONEDA! Ganas 3 monedas.";
         }
     }
+    let li = document.createElement("li");
+    li.innerHTML = feedbackText;
+    historicalContainer.appendChild(li);
     coinsWained = coinsWained + numberToAdd;
 }
 
