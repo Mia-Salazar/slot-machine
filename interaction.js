@@ -36,10 +36,6 @@ function quit() {
     li.innerHTML = "Sacas todas las monedas.";
     historicalContainer.appendChild(li);
 }
-//Historical
-function addHistoric() {
-
-}
 
 //Roll
 function randomNumber() {
