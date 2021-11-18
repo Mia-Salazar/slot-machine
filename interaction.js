@@ -1,4 +1,5 @@
 var listaImagenes = ["aubergine", "banana", "carrots", "cherries", "dollar", "lemon", "orange", "peach", "potato", "tomato"];
+const dollarTexts = ["¡Una MONEDA! Ganas 1 moneda", "¡Dos MONEDAS! Ganas 4 monedas", "¡Tres MONEDAS! Ganas 10 monedas"];
 const coins = document.getElementById("coins");
 const coinsLabel = document.getElementById("number-coins");
 const coinsButton = document.getElementById("coins-button");
@@ -6,7 +7,7 @@ const handleImage = document.getElementById("handle");
 const imagesContainer = document.getElementById("figures-container");
 const historicalContainer = document.getElementById("historical-list");
 const imagesArray = imagesContainer.getElementsByTagName("img");
-let coinsWained = 0;
+let feedbackText;
 
 //Coins management
 document.getElementById("form").addEventListener("submit", processForm, false);
@@ -26,8 +27,7 @@ function processForm(event) {
 }
 
 function quit() {
-    const message = `Has conseguido un total de ${coinsWained} monedas`;
-    coins.value = Number(coins.value) + coinsWained;
+    const message = `Has conseguido un total de ${coinsLabel.innerHTML} monedas`;
     window.alert(message);
     coinsLabel.innerHTML = 0;
     coins.disabled = false;
@@ -44,41 +44,43 @@ function randomNumber() {
 
 function calculateDollar(number) {
     const dollarValue = [1, 4, 10];
-    const dollarTexts = ["¡Una MONEDA! Ganas 1 moneda", "¡Dos MONEDAS! Ganas 4 monedas", "¡Tres MONEDAS! Ganas 10 monedas"];
-    coinsWained = coinsWained + dollarValue[number];
-    let li = document.createElement("li");
-    li.innerHTML = dollarTexts[number];
-    historicalContainer.appendChild(li);
+    feedbackText = dollarTexts[number - 1];
+    return dollarValue[number - 1];
 }
 
-function calculateFruitAndVegetable(number, array) {
+function calculateFruitAndVegetable(array) {
     let numberToAdd = 0;
-    let feedbackText;
     if (array[0] === array[1] && array[1] === array[2]) {
         numberToAdd = 5;
         feedbackText = "¡Tres IGUALES! Ganas 5 monedas.";
     } else {
-        if (array[0] === array[1] && array[0] !== "dollar") {
+        if (array[0] === array[1] || array[1] === array[2] || array[0] === array[2]) {
             numberToAdd = 2;
-        }
-        if (array[1] === array[2] && array[1] !== "dollar") {
-            numberToAdd = 2;
-        }
-        if (array[0] === array[2] && array[2] !== "dollar") {
-            numberToAdd = 2;
+            feedbackText = "¡Dos IGUALES! Ganas 2 monedas.";
         }
     }
-    if (numberToAdd === 2) {
-        feedbackText = "¡Dos IGUALES! Ganas 2 monedas.";
-        if (number === 1) {
-            numberToAdd = 3;
-            feedbackText = "¡Dos IGUALES y una MONEDA! Ganas 3 monedas.";
+    return numberToAdd;
+}
+
+function calculateScore(number, array) {
+    let numberToAdd;
+    if (number <= 1) {
+        numberToAdd = calculateFruitAndVegetable(array) 
+    }
+    if (number === 1 && numberToAdd === 2) {
+        numberToAdd = 3;
+        feedbackText = "¡Dos IGUALES y una MONEDA! Ganas 3 monedas.";
+    } else {
+        if (number >= 1) {
+            numberToAdd = calculateDollar(number);
         }
     }
-    let li = document.createElement("li");
-    li.innerHTML = feedbackText;
-    historicalContainer.appendChild(li);
-    coinsWained = coinsWained + numberToAdd;
+    if (feedbackText) {
+        let li = document.createElement("li");
+        li.innerHTML = feedbackText;
+        historicalContainer.appendChild(li);
+        coinsLabel.innerHTML = Number(coinsLabel.innerHTML) + numberToAdd;
+    }
 }
 
 function changeImages() {
@@ -92,15 +94,11 @@ function changeImages() {
 }
 
 function roll() {
+    feedbackText = undefined;
     coinsLabel.innerHTML = coinsLabel.innerHTML - 1;
     const imgArray = changeImages();
     const dollarsQuantity = imgArray.filter(figure => figure === "dollar");
-    if (dollarsQuantity.length > 0) {
-        calculateDollar(dollarsQuantity.length - 1);
-    }
-    if (dollarsQuantity.length < 3) {
-        calculateFruitAndVegetable(dollarsQuantity.length, imgArray);
-    }
+    calculateScore(dollarsQuantity.length, imgArray)
 }
 
 //Slot management
@@ -112,8 +110,12 @@ function insertCoin() {
 }
 
 function clickHandle() {
+    handleImage.src = "img/palancaDOWN.png";
+}
+
+function finishClickHandle() {
+    handleImage.src = "img/palancaUP.png";
     if (coinsLabel.innerHTML > 0) {
-        handleImage.src = "img/palancaDOWN.png";
         let li = document.createElement("li");
         li.innerHTML = "Gastas una moneda.";
         historicalContainer.appendChild(li);
@@ -122,9 +124,3 @@ function clickHandle() {
         insertCoin();
     }
 }
-
-
-function finishClickHandle() {
-    handleImage.src = "img/palancaUP.png";
-}
-
