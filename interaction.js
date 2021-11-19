@@ -18,10 +18,10 @@ function processForm(event) {
     if (coins.value > 0) {
         coins.disabled = true;
         coinsButton.disabled = true;
-        coinsLabel.innerHTML = coins.value;
+        coinsLabel.innerHTML = Number(coins.value);
         coins.value = 0;
         let li = document.createElement("li");
-        li.innerHTML = "Has introducido monedas.";
+        li.innerHTML = `Has introducido ${coinsLabel.innerHTML} monedas.`;
         historicalContainer.appendChild(li);
     }
 }
@@ -29,6 +29,7 @@ function processForm(event) {
 function quit() {
     const message = `Has conseguido un total de ${coinsLabel.innerHTML} monedas`;
     window.alert(message);
+    coins.value = coinsLabel.innerHTML;
     coinsLabel.innerHTML = 0;
     coins.disabled = false;
     coinsButton.disabled = false;
