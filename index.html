@@ -16,42 +16,42 @@
             <h1 class="title">Máquina tragaperras</h1>
             <h2 class="subtitle">María Salazar García-Rosales</h2>
         </header>
-        <main>
+        <main class="main">
             <section class="coins-container">
-                <h3 class="coins-title">Introduce monedas:</h3>
-                <form class="form" action="example" method="POST" id="form">
+                <form class="form container" action="example" method="POST" id="form">
                     <label for="coins">Introduce monedas</label>
-                    <input type="number" name="coins" id="coins" placeholder="Introduce monedas" min="1">
-                    <button type="submit" id="coins-button">Introducir</button>
+                    <input type="number" name="coins" id="coins" placeholder="Introduce monedas" min="1" class="coins-input">
+                    <button type="submit" class="coins-button button" id="coins-button">Introducir</button>
                 </form>
-                <p>El número de monedas actual es:</p>
-                <p class="number-coins" id="number-coins">0</p>
-                <button type="button" id="leave">Salir</button>
+                <div class="container">
+                    <p class="number-text">El número de monedas actual es:</p>
+                    <p class="number-coins" id="number-coins">0</p>
+                    <button type="button" id="leave" class="button quit-button">Salir</button>
+                </div>
             </section>
             <section class="slot-machine">
                 <div class="slot-container">
                     <div class="slot-border">
                         <div class="figures-container" id="figures-container">
-                            <figure>
+                            <figure class="img-container">
                                 <img alt="" class="img" src="img/pingu.png" id="firstImage">
                             </figure>
-                            <figure>
+                            <figure class="img-container">
                                 <img alt="" class="img" src="img/pingu.png" id="secondImage">
                             </figure>
-                            <figure>
+                            <figure class="img-container">
                                 <img alt="" class="img" src="img/pingu.png" id="thirdImage">
                             </figure>
                         </div>
                     </div>
                 </div>
                 <figure class="handle-container" id="handle-container">
-                    <img alt="" class="img" id="handle" src="img/palancaUP.png" >
+                    <img alt="" class="img handle-img" id="handle" src="img/palancaUP.png" >
                 </figure>
             </section>
-            <section class="historical-container">
+            <section class="historical-container container">
                 <h3 class="historical-title">Historial de movimientos:</h3>
                 <ul class="historical-list" id="historical-list">
-
                 </ul>
             </section>
         </main>

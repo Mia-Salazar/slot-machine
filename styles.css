@@ -8,72 +8,143 @@ body {
     box-sizing: border-box;
 }
 
+.main {
+    padding: 0 8px;
+    margin-bottom: 32px;
+}
+
 /*Header*/
 .header {
     width: 100%;
-    padding: 18px;
+    padding: 16px;
     background-color: #0F838C;
     color: white;
 }
 
 .header .title {
     margin: 0;
-    font-size: 32px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 28px;
+    font-family: 'Playfair Display', serif;
     text-align: center;
 }
 
 .header .subtitle {
-    margin-top: 0;
+    margin: 0 auto;
     font-size: 16px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Source Sans Pro', sans-serif;
     text-align: center;
 }
 
 /*Coins*/
 .coins-container, .historical-container {
+    width: fit-content;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 24px;
+    align-items: stretch;
+    margin: 48px auto 0 auto;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+.container {
+    padding: 20px 24px;
+    border-radius: 48px;
+    background-color: #FBF3E4;
 }
 
 .number-coins {
     margin-top: 0;
+    margin-bottom: 0;
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 24px;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .form {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.button {
+    width: 100%;
+    padding: 8px;
+    appearance: none;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.number-text {
+    max-width: 175px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.coins-button {
+    margin-top: 16px;
+    background-color: #d8422e;
+}
+
+.quit-button {
+    margin-top: 16px;
+    background-color: #0F838C;
+}
+
+.button:hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.75;
+    cursor: disabled;
+}
+
+.coins-input {
+    appearance: none;
+    border: none;
+    background: #FBF3E4;
+    border-bottom: 2px solid #d8422e;
+    margin-top: 11px;
+    padding: 8px 4px;
+}
+
+.coins-input:disabled {
+    background-color: #DFD8CA;
 }
 
 /*Slot*/
 .slot-machine {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 75px;
     align-items: center;
-    justify-content: center;
 }
 
 .slot-container {
-    margin: 24px;
-    padding: 16px;
+    margin: 24px 0;
+    padding: 8px;
     background-color: #d8422e;
     border-radius: 48px;
 }
 
 .slot-border {
-    padding: 16px;
+    padding: 8px;
     background-color: #d8422e;
     border-radius: 48px;
-    border: 0.75em solid;
-    border-style: dotted;
-    border-color: #FBF3E4;
+    border: 0.55em dotted #FBF3E4;
 }
 
 .figures-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 16px;
+    padding: 10px;
     background-color: white;
     border-radius: 48px;
 }
@@ -81,6 +152,10 @@ body {
 .img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.img-container {
+    margin: 0;
 }
 
 .handle-container {
@@ -91,14 +166,83 @@ body {
     cursor: pointer;
 }
 
+/*Historical*/
+.historical-list {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-bottom: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.historical-list li {
+    position: relative;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    margin-bottom: 8px;
+    padding-left: 24px;
+}
+
+.historical-list li:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    display: block;
+    border-radius: 50%;
+    background-color: #d8422e;
+}
+
+.historical-title {
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+}
+
+/*Responsive*/
 @media (min-width: 768px) {
     .slot-container {
         max-width: 600px;
-        margin: 32px 0;
+        margin: 48px 0 8px 0;
+        padding: 16px;
+    }
+
+    .slot-border {
+        padding: 16px;
+        border: 0.75em dotted #FBF3E4;
     }
 
     .handle-container {
         max-width: 150px;
+    }
+
+    .slot-machine {
+        display: flex;
+        justify-content: center;
+    }
+
+    .figures-container {
+        padding: 16px;
+    }
+
+    .img-container {
+        margin: 16px 36px;
+    }
+
+    .form {
+        margin-bottom: 0;
+        margin-right: 48px;
+    }
+
+    .coins-container {
+        flex-direction: row;
+    }
+
+    .historical-container {
+        width: 500px;
     }
 }
 
@@ -108,8 +252,3 @@ body {
     }
 }
 
-/*Historical*/
-.historical-list {
-    padding: 0;
-    list-style-type: none;
-}
