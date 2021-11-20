@@ -168,6 +168,10 @@ body {
 }
 
 /*Historical*/
+.historical-container {
+    margin-top: 0;
+}
+
 .historical-list {
     max-height: 350px;
     overflow-y: auto;
@@ -207,7 +211,7 @@ body {
 @media (min-width: 768px) {
     .slot-container {
         max-width: 600px;
-        margin: 48px 0 8px 0;
+        margin: 48px 0;
         padding: 16px;
     }
 

@@ -104,7 +104,7 @@ function roll() {
 
 //Slot management
 handleImage.addEventListener("mousedown", clickHandle, false);
-handleImage.addEventListener("click", finishClickHandle, false);
+handleImage.addEventListener("mouseup", finishClickHandle, false);
 
 function insertCoin() {
     window.alert("Por favor, introduce monedas.");
